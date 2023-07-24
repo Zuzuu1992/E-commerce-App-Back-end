@@ -30,3 +30,5 @@ export const createTable = async () => {
       )
     `);
 };
+
+export default pool;
