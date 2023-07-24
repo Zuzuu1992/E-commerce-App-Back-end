@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node ./src/app.js",
     "product:save": "node app.js product:save",
@@ -22,6 +22,7 @@
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "pg": "^8.11.1",
     "readline-sync": "^1.4.10"
   }
 }
