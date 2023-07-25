@@ -44,6 +44,25 @@ paths:
         "500":
           description: Internal server error
 
+  /products/{productId}:
+    get:
+      summary: Get product by ID
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Successfull
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: Product not found
+
   /purchases:
     post:
       summary: Purchase a product
@@ -69,25 +88,6 @@ paths:
           description: Purchase successful
         "500":
           description: Internal server error
-
-  /products/{productId}:
-    get:
-      summary: Get product by ID
-      parameters:
-        - in: path
-          name: productId
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Product"
-        "404":
-          description: Product not found
 
   /products/{productId}/quantity:
     get:
