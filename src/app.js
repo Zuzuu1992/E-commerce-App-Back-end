@@ -1,5 +1,6 @@
 import bodyParser from "body-parser";
 import express from "express";
+import cors from "cors";
 import pool, { createTable } from "./config/sql.js";
 import productRouter from "./routes/product-router.js";
 
@@ -15,7 +16,7 @@ async function init() {
 
   function startServer() {
     app.use(bodyParser.json());
-    app.use(cors);
+    app.use(cors());
 
     app.use("/api", productRouter);
 
