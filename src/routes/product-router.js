@@ -1,8 +1,5 @@
 import express from "express";
 import {
-  addProducts,
-  deleteProduct,
-  getAllProducts,
   getProductById,
   saveProduct,
 } from "../controllers/products-controller.js";
