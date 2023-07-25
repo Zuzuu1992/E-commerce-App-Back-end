@@ -11,29 +11,8 @@ servers:
     description: Web server
 paths:
   /products:
-    get:
-      summary: Get all products
-      responses:
-        "200":
-          description: Successful response with an array of products
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    title:
-                      type: string
-                    price:
-                      type: number
-                    quantity:
-                      type: integer
-
     post:
-      summary: Add a new product
+      summary: Save a product
       requestBody:
         required: true
         content:
@@ -41,15 +20,16 @@ paths:
             schema:
               type: object
               properties:
-                title:
+                name:
                   type: string
                 price:
                   type: number
-                quantity:
-                  type: integer
+              required:
+                - name
+                - price
       responses:
-        "200":
-          description: Successful response with the added product
+        "201":
+          description: Product saved successfully
           content:
             application/json:
               schema:
@@ -57,29 +37,174 @@ paths:
                 properties:
                   id:
                     type: integer
-                  title:
+                  name:
                     type: string
                   price:
                     type: number
-                  quantity:
-                    type: integer
+        "500":
+          description: Internal server error
 
-  /products/{id}:
-    delete:
-      summary: Delete a product by ID
+  /purchases:
+    post:
+      summary: Purchase a product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+                price:
+                  type: number
+                productid:
+                  type: integer
+              required:
+                - quantity
+                - price
+                - productid
+      responses:
+        "201":
+          description: Purchase successful
+        "500":
+          description: Internal server error
+
+  /products/{productId}:
+    get:
+      summary: Get product by ID
       parameters:
         - in: path
-          name: id
+          name: productId
           required: true
           schema:
             type: integer
       responses:
         "200":
-          description: Successful response when the product is deleted
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: Product not found
+
+  /products/{productId}/quantity:
+    get:
+      summary: Get quantity of product
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
+                  productid:
+                    type: integer
+                  total_quantity:
+                    type: integer
+        "500":
+          description: Internal server error
+
+  /products/{productId}/average-price:
+    get:
+      summary: Get average price of product
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  productid:
+                    type: integer
+                  average_price:
+                    type: number
+        "500":
+          description: Internal server error
+
+  /products/{productId}/profit:
+    get:
+      summary: Get product profit
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  productid:
+                    type: integer
+                  total_profit:
+                    type: number
+        "500":
+          description: Internal server error
+
+  /products/fewest:
+    get:
+      summary: Get fewest product
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  productid:
+                    type: integer
+                  total_quantity:
+                    type: integer
+        "404":
+          description: No products found
+
+  /products/popular:
+    get:
+      summary: Get popular product
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  productid:
+                    type: integer
+                  total_quantity:
+                    type: integer
+        "404":
+          description: No products found
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number

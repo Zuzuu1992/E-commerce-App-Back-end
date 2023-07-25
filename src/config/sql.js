@@ -17,18 +17,16 @@ export const createTable = async () => {
       CREATE TABLE IF NOT EXISTS products(
         id SERIAL PRIMARY KEY,
         title VARCHAR(255) NOT NULL,
-        price DECIMAL(10, 2) NOT NULL,
-        quantity INT NOT NULL
+        price NUMERIC(10, 2) NOT NULL,
       )
     `);
 
   await pool.query(`
-      CREATE TABLE IF NOT EXISTS orders(
+      CREATE TABLE IF NOT EXISTS purchases(
         id SERIAL PRIMARY KEY,
-        product_id INT NOT NULL,
         quantity INT NOT NULL,
-        order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (product_id) REFERENCES products(id)
+        price NUMERIC(10, 2) NOT NULL,
+        productid INTEGER REFERENCES products(id)
       )
     `);
 };
