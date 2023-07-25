@@ -1,0 +1,85 @@
+openapi: 3.0.0
+info:
+  title: E-commerce App
+  description: E-commerce App
+  version: 0.1.9
+
+servers:
+  - url: http://localhost:3000/api
+    description: local server
+  - url: https://e-commerce-app-1jpi.onrender.com/api
+    description: Web server
+paths:
+  /products:
+    get:
+      summary: Get all products
+      responses:
+        "200":
+          description: Successful response with an array of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    price:
+                      type: number
+                    quantity:
+                      type: integer
+
+    post:
+      summary: Add a new product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                price:
+                  type: number
+                quantity:
+                  type: integer
+      responses:
+        "200":
+          description: Successful response with the added product
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  price:
+                    type: number
+                  quantity:
+                    type: integer
+
+  /products/{id}:
+    delete:
+      summary: Delete a product by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Successful response when the product is deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
