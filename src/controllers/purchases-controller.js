@@ -1,6 +1,6 @@
 import pool from "../config/sql.js";
 
-export const purchaseProduct = app.post(async (req, res) => {
+export const purchaseProduct = async (req, res) => {
   try {
     const { quantity, price, productid } = req.body;
     const query =
@@ -12,9 +12,9 @@ export const purchaseProduct = app.post(async (req, res) => {
     console.error("Error purchasing product:", err);
     res.status(500).json({ error: "Internal server error" });
   }
-});
+};
 
-export const getProductQuantitiy = app.get(async (req, res) => {
+export const getProductQuantitiy = async (req, res) => {
   try {
     const productId = req.params.productId;
     const query =
@@ -26,9 +26,9 @@ export const getProductQuantitiy = app.get(async (req, res) => {
     console.error("Error getting quantity of product:", err);
     res.status(500).json({ error: "Internal server error" });
   }
-});
+};
 
-export const getAveragePrice = app.get(async (req, res) => {
+export const getAveragePrice = async (req, res) => {
   try {
     const productId = req.params.productId;
     const query =
@@ -40,9 +40,9 @@ export const getAveragePrice = app.get(async (req, res) => {
     console.error("Error getting average price of product:", err);
     res.status(500).json({ error: "Internal server error" });
   }
-});
+};
 
-export const getProductProfit = app.get(async (req, res) => {
+export const getProductProfit = async (req, res) => {
   try {
     const productId = req.params.productId;
     const query =
@@ -54,9 +54,9 @@ export const getProductProfit = app.get(async (req, res) => {
     console.error("Error getting product profit:", err);
     res.status(500).json({ error: "Internal server error" });
   }
-});
+};
 
-export const getFewest = app.get(async (req, res) => {
+export const getFewest = async (req, res) => {
   try {
     const query =
       "SELECT productid, SUM(quantity) AS total_quantity FROM purchases GROUP BY productid ORDER BY total_quantity ASC LIMIT 1";
@@ -70,9 +70,9 @@ export const getFewest = app.get(async (req, res) => {
     console.error("Error getting fewest product:", err);
     res.status(500).json({ error: "Internal server error" });
   }
-});
+};
 
-export const getPopular = app.get(async (req, res) => {
+export const getPopular = async (req, res) => {
   try {
     const query =
       "SELECT productid, SUM(quantity) AS total_quantity FROM purchases GROUP BY productid ORDER BY total_quantity DESC LIMIT 1";
@@ -86,4 +86,4 @@ export const getPopular = app.get(async (req, res) => {
     console.error("Error getting popular product:", err);
     res.status(500).json({ error: "Internal server error" });
   }
-});
+};

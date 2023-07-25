@@ -36,7 +36,7 @@ import pool from "../config/sql.js";
 //   }
 // };
 
-export const saveProduct = app.post(async (req, res) => {
+export const saveProduct = async (req, res) => {
   try {
     const { name, price } = req.body;
     const query =
@@ -48,9 +48,9 @@ export const saveProduct = app.post(async (req, res) => {
     console.error("Error saving product:", err);
     res.status(500).json({ error: "Internal server error" });
   }
-});
+};
 
-export const getProductById = app.get(async (req, res) => {
+export const getProductById = async (req, res) => {
   try {
     const productId = req.params.productId;
     const query = "SELECT * FROM products WHERE id = $1";
@@ -64,4 +64,4 @@ export const getProductById = app.get(async (req, res) => {
     console.error("Error getting product by ID:", err);
     res.status(500).json({ error: "Internal server error" });
   }
-});
+};
