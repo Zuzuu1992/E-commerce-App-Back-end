@@ -16,6 +16,5 @@ purchaseRouter.get("/products/:productId/average-price", getAveragePrice);
 purchaseRouter.get("/products/:productId/profit", getProductProfit);
 purchaseRouter.get("/products/fewest", getFewest);
 purchaseRouter.get("/products/popular", getPopular);
-// productRouter.delete("/products/:id", deleteProduct);
 
 export default purchaseRouter;
