@@ -5,11 +5,10 @@ export const saveProduct = async (req, res) => {
     const { name, price } = req.body;
 
     const query =
-      "INSERT INTO products(name, price) VALUES ($1, $2) RETURNING id";
+      "INSERT INTO products(name, price) VALUES($1, $2) RETURNING id";
     const values = [name, price];
 
     const result = await pool.query(query, values);
-
     res.status(201).json({ id: result.rows[0].id, name, price });
   } catch (err) {
     res.status(500).json({ error: "Internal server error" });
