@@ -9,7 +9,6 @@ export const saveProduct = async (req, res) => {
     const result = await pool.query(query, values);
     res.status(201).json({ id: result.rows[0].id, name, price });
   } catch (err) {
-    console.error("Error saving product:", err);
     res.status(500).json({ error: "Internal server error" });
   }
 };
@@ -25,7 +24,6 @@ export const getProductById = async (req, res) => {
       res.json(result.rows[0]);
     }
   } catch (err) {
-    console.error("Error getting product by ID:", err);
     res.status(500).json({ error: "Internal server error" });
   }
 };

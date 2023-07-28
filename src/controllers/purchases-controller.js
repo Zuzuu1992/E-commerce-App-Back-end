@@ -9,7 +9,6 @@ export const purchaseProduct = async (req, res) => {
     await pool.query(query, values);
     res.status(201).json({ message: "Purchase successful" });
   } catch (err) {
-    console.error("Error purchasing product:", err);
     res.status(500).json({ error: "Internal server error" });
   }
 };
@@ -23,7 +22,6 @@ export const getProductQuantitiy = async (req, res) => {
     const totalQuantity = result.rows[0].total_quantity || 0;
     res.json({ productid: productId, total_quantity: totalQuantity });
   } catch (err) {
-    console.error("Error getting quantity of product:", err);
     res.status(500).json({ error: "Internal server error" });
   }
 };
@@ -37,7 +35,6 @@ export const getAveragePrice = async (req, res) => {
     const averagePrice = result.rows[0].average_price || 0;
     res.json({ productid: productId, average_price: averagePrice });
   } catch (err) {
-    console.error("Error getting average price of product:", err);
     res.status(500).json({ error: "Internal server error" });
   }
 };
@@ -51,7 +48,6 @@ export const getProductProfit = async (req, res) => {
     const totalProfit = result.rows[0].total_profit || 0;
     res.json({ productid: productId, total_profit: totalProfit });
   } catch (err) {
-    console.error("Error getting product profit:", err);
     res.status(500).json({ error: "Internal server error" });
   }
 };
@@ -67,7 +63,6 @@ export const getFewest = async (req, res) => {
       res.json(result.rows[0]);
     }
   } catch (err) {
-    console.error("Error getting fewest product:", err);
     res.status(500).json({ error: "Internal server error" });
   }
 };
@@ -83,7 +78,6 @@ export const getPopular = async (req, res) => {
       res.json(result.rows[0]);
     }
   } catch (err) {
-    console.error("Error getting popular product:", err);
     res.status(500).json({ error: "Internal server error" });
   }
 };
