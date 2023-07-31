@@ -7,6 +7,6 @@ import {
 const productRouter = express.Router();
 
 productRouter.post("/products", saveProduct);
-productRouter.get("/products/{productId}", getProductById);
+productRouter.get("/products/:productId", getProductById);
 
 export default productRouter;
