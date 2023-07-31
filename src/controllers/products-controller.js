@@ -8,7 +8,12 @@ export const saveProduct = async (req, res) => {
       "INSERT INTO products(name, price) VALUES($1, $2) RETURNING *";
     const values = [name, price];
 
-    const result = await pool.query(query, values);
+    const result = await pool.query(query, values, (err, result) => {
+      if (err) {
+        console.error("Error inserting data:", err);
+        return res.status(500).json({ error: "Error inserting data" });
+      }
+    });
     console.log(result);
     res.status(201).json({ id: result.rows[0].id, name, price });
   } catch (err) {
