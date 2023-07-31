@@ -5,7 +5,7 @@ export const saveProduct = async (req, res) => {
     const { title, price } = req.body;
 
     const query =
-      "INSERT INTO products(name, price) VALUES($1, $2) RETURNING *";
+      "INSERT INTO products(title, price) VALUES($1, $2) RETURNING *";
     const values = [title, price];
 
     const result = await pool.query(query, values, (err, result) => {
