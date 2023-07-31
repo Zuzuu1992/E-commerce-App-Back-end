@@ -2,11 +2,11 @@ import pool from "../config/sql.js";
 
 export const saveProduct = async (req, res) => {
   try {
-    const { name, price } = req.body;
+    const { title, price } = req.body;
 
     const query =
       "INSERT INTO products(name, price) VALUES($1, $2) RETURNING *";
-    const values = [name, price];
+    const values = [title, price];
 
     const result = await pool.query(query, values, (err, result) => {
       if (err) {
