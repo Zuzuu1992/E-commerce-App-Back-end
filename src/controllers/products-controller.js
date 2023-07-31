@@ -2,18 +2,13 @@ import pool from "../config/sql.js";
 
 export const saveProduct = async (req, res) => {
   try {
-    const { title, price } = req.body;
+    const { name, price } = req.body;
 
     const query =
-      "INSERT INTO products(title, price) VALUES($1, $2) RETURNING *";
-    const values = [title, price];
+      "INSERT INTO products(name, price) VALUES($1, $2) RETURNING *";
+    const values = [name, price];
 
-    const result = await pool.query(query, values, (err, result) => {
-      if (err) {
-        console.error("Error inserting data:", err);
-        return res.status(500).json({ error: "Error inserting data" });
-      }
-    });
+    const result = await pool.query(query, values);
     console.log(result);
     res.status(201).json({ id: result.rows[0].id, name, price });
   } catch (err) {
