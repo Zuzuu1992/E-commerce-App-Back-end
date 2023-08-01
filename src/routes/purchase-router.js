@@ -11,10 +11,10 @@ import {
 const purchaseRouter = express.Router();
 
 purchaseRouter.post("/purchases", purchaseProduct);
-purchaseRouter.get("/products/:productId/quantity", getProductQuantitiy);
-purchaseRouter.get("/products/:productId/average-price", getAveragePrice);
-purchaseRouter.get("/products/:productId/profit", getProductProfit);
-purchaseRouter.get("/products/fewest", getFewest);
-purchaseRouter.get("/products/popular", getPopular);
+purchaseRouter.get("/purchases/:productId/quantity", getProductQuantitiy);
+purchaseRouter.get("/purchases/:productId/average-price", getAveragePrice);
+purchaseRouter.get("/purchases/:productId/profit", getProductProfit);
+purchaseRouter.get("/purchases/fewest", getFewest);
+purchaseRouter.get("/purchases/popular", getPopular);
 
 export default purchaseRouter;
