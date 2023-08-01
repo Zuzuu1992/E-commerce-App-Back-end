@@ -89,7 +89,7 @@ paths:
         "500":
           description: Internal server error
 
-  /products/{productId}/quantity:
+  /purchases/{productId}/quantity:
     get:
       summary: Get quantity of product
       parameters:
@@ -113,7 +113,7 @@ paths:
         "500":
           description: Internal server error
 
-  /products/{productId}/average-price:
+  /purchases/{productId}/average-price:
     get:
       summary: Get average price of product
       parameters:
@@ -137,7 +137,7 @@ paths:
         "500":
           description: Internal server error
 
-  /products/{productId}/profit:
+  /purchases/{productId}/profit:
     get:
       summary: Get product profit
       parameters:
@@ -161,7 +161,7 @@ paths:
         "500":
           description: Internal server error
 
-  /products/fewest:
+  /purchases/fewest:
     get:
       summary: Get fewest product
       responses:
@@ -179,7 +179,7 @@ paths:
         "404":
           description: No products found
 
-  /products/popular:
+  /purchases/popular:
     get:
       summary: Get popular product
       responses:
