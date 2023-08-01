@@ -54,11 +54,10 @@ export const getProductProfit = async (req, res) => {
 
 export const getFewest = async (req, res) => {
   try {
-    console.log("nihau");
     const query =
       "SELECT productid, SUM(quantity) AS total_quantity FROM purchases GROUP BY productid ORDER BY total_quantity ASC LIMIT 1";
     const result = await pool.query(query);
-    console.log("konishua");
+
     if (result.rows.length === 0) {
       res.status(404).json({ error: "No products found" });
     } else {
@@ -71,11 +70,10 @@ export const getFewest = async (req, res) => {
 
 export const getPopular = async (req, res) => {
   try {
-    console.log("nihau");
     const query =
       "SELECT productid, SUM(quantity) AS total_quantity FROM purchases GROUP BY productid ORDER BY total_quantity DESC LIMIT 1";
     const result = await pool.query(query);
-    console.log("konishua");
+
     if (result.rows.length === 0) {
       res.status(404).json({ error: "No products found" });
     } else {
